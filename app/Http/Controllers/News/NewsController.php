@@ -9,7 +9,7 @@ class NewsController extends Controller
 {
     public function news($id)
     {
-        $new = $this->getNew($id);
-        return view('news.news', ['new' => $new]);
+        $variable = $this->getNewsVariable($id);
+        return view('news.news', ['variable' => $variable]);
     } 
 }

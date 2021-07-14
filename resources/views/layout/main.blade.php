@@ -34,8 +34,8 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
-<x-header></x-header>
-<x-sidebar></x-sidebar>
+<?php /* <x-header></x-header> 
+ <x-sidebar></x-sidebar> */?>
 <div class="content-header">
     <div class="container-fluid">
     <div class="row mb-2">
@@ -53,7 +53,7 @@
 </div>
 @yield('content')
 
-<x-footer></x-footer>
+<!-- <x-footer></x-footer> -->
 
 
 

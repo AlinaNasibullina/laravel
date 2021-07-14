@@ -49,20 +49,20 @@ class Controller extends BaseController
     protected function getCategoryNews($category)
     {
         $news = $this->getNews();
-        foreach ($news as $new) {
-            if ($new['category'] == $category) {
-                $newsList[] = $new;
+        foreach ($news as $variable) {
+            if ($variable['category'] == $category) {
+                $newsList[] = $variable;
             }
         }
 
         return $newsList;
     }
 
-    protected function getNew($id) {
+    protected function getNewsVariable($id) {
         $news = $this->getNews();
-        foreach($news as $new) {
-            if ($new['id'] == $id) {
-                return $new;
+        foreach($news as $variable) {
+            if ($variable['id'] == $id) {
+                return $variable;
             }
         }
     }
