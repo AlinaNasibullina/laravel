@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -21,6 +22,7 @@ class CategoryController extends Controller
 
     public function category(string $name)
     {
+        
         $categoryNews = $this->getCategoryNews($name);
         return view('admin.categories.category', [
             'categoryName' => $name,

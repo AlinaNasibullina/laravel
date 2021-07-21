@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Faker\Factory;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\DB;
 
 class Controller extends BaseController
 {
@@ -17,53 +17,51 @@ class Controller extends BaseController
 
     protected function getCategories()
     {
-        return $array = [
-            'sport',
-            'art',
-            'fasion',
-            'traveling',
-            'digital'
-        ];
+        $this->categories = DB::select('SELECT id, category_name FROM category');
+        return $this->categories;
+
     }
 
     protected function getNews()
     {
-        $id = 1;
-        $faker = Factory::create('ru_Ru');
-        $categories = $this->getCategories();
-        foreach ($categories as $category) {
-            for ($i = 1; $i <= 5; $i++) {
-                $this->news[] = [
-                    'id' => $id,
-                    'title' => "Новости $category $i",
-                    'category' => $category,
-                    'description' => $faker->text(150)
-                ];
-                $id++;
-            }
-        }
+        $this->news = DB::select('SELECT id, newsTitle, created_at FROM news');
+
 
         return $this->news;
     }
 
-    protected function getCategoryNews($category)
+    protected function getCategoryNews($categoryName)
     {
-        $news = $this->getNews();
-        foreach ($news as $variable) {
-            if ($variable['category'] == $category) {
-                $newsList[] = $variable;
+ 
+        $categoryId = null;
+        $categoryList = $this->getCategories();
+        foreach($categoryList as $category){
+            if($category->category_name == $categoryName) {
+                $categoryId = $category->id;
+                break;
             }
         }
+        $newsList = DB::select(
+            'SELECT 
+                id, newsTitle, created_at, updated_at, news_content, news_img
+            FROM news
+            WHERE news_category = :categoryId',
+            ['categoryId' => $categoryId]);
+
 
         return $newsList;
     }
 
     protected function getNewsVariable($id) {
-        $news = $this->getNews();
-        foreach($news as $variable) {
-            if ($variable['id'] == $id) {
-                return $variable;
-            }
-        }
+
+        $variable = DB::select(
+            'SELECT id, newsTitle, created_at, news_content, news_img
+            FROM news
+            WHERE id = :id',
+            ['id' => $id]
+        );
+        return $variable;
+
+
     }
 }

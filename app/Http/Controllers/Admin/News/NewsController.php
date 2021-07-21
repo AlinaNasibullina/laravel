@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\News;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -15,6 +16,12 @@ class NewsController extends Controller
     public function index($id)
     {
         $variable = $this->getNewsVariable($id);
+        // $variable = DB::select(
+        //     'SELECT id, newsTitle, created_at, news_content, news_img
+        //     FROM news
+        //     WHERE id = :id',
+        //     ['id' => $id]
+        // );
         return view('admin.news.index', ['variable' => $variable]);
     }
 

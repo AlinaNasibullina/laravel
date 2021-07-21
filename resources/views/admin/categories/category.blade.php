@@ -9,7 +9,10 @@
     <h2>Список новостей {{ $categoryName }}</h2>
     <ul>
     @forelse ($categoryNews as $variable)
-    <li><a href="/admin/categories/news/{{ $variable['id'] }}">{{ $variable['title'] }}</a></li>
+    <li>
+      <a href="/admin/categories/news/{{ $variable->id }}">{{ $variable->newsTitle }}</a>
+      Дата публикации {{ $variable->created_at}}
+    </li>
     @empty
     <h1>Новостей нет</h1>
     @endforelse

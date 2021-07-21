@@ -6,9 +6,9 @@
 
 @section('content')
     <h1>Админка</h1>
-    <h2><?=$variable['title']?></h2>
-    <h3><?=$variable['category']?></h3>
-    <p><?=$variable['description']?></p>
+    <h2><?=$variable[0]->newsTitle?></h2>
+    <p><?=$variable[0]->created_at?></p>
+    <p><?=$variable[0]->news_content?></p>
 
     <a href="/">На главную</a>
     <a href="/admin">На страницу управления</a>

@@ -11,7 +11,10 @@
     <ul>
     @foreach ($categoryNews as $variable)
      
-    <li><a href="news/{{ $variable['id'] }}">{{ $variable['title'] }}</a></li>
+    <li>
+      <a href="news/{{ $variable->id }}">{{ $variable->newsTitle }}</a>
+      Дата публикации {{$variable->created_at}}
+    </li>
     
     @endforeach
     </ul>
